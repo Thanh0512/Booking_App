@@ -1,0 +1,126 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f6fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1f2937;
+}
+
+
+/* ================= Content ================= */
+
+.content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 40px;
+    background: #f5f6fa;
+}
+
+
+/* ================= Tiêu đề ================= */
+
+.content h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+
+/* ================= Form ================= */
+
+.form {
+    background: #fff;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 40px;
+    transition: all 0.3s ease;
+}
+
+.form:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================= Inputs, Textarea, Select ================= */
+
+.form input,
+.form textarea,
+.form select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #fdfdfd;
+    transition: all 0.25s ease-in-out;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+.form textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+
+/* ================= Label ================= */
+
+.form label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+    color: #34495e;
+    font-size: 14px;
+}
+
+
+/* ================= Nút lưu ================= */
+
+.saveBtn {
+    grid-column: span 2;
+    background: linear-gradient(90deg, #00b3b3, #008080);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 20px;
+}
+
+.saveBtn:hover {
+    background: linear-gradient(90deg, #008080, #006666);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================= Responsive ================= */
+
+@media (max-width: 992px) {
+    .form {
+        grid-template-columns: 1fr;
+    }
+    .saveBtn {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 20px;
+        margin-left: 0;
+    }
+}

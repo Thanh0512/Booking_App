@@ -1,0 +1,223 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* === HEADER === */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.addBtn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(39, 174, 96, 0.3);
+}
+
+.addBtn:hover {
+    background: #219653;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+}
+
+
+/* === BẢNG DANH SÁCH === */
+
+.tableWrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    flex: 1;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    table-layout: auto;
+}
+
+.table th {
+    text-align: left;
+    padding: 14px 10px;
+    color: #7f8c8d;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #eee;
+}
+
+.table td {
+    padding: 14px 10px;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.table tr:hover {
+    background-color: #f8f9fa;
+}
+
+
+/* ID */
+
+.id {
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px;
+    color: #95a5a6;
+    letter-spacing: 0.5px;
+}
+
+
+/* Tên khách sạn */
+
+.name {
+    font-weight: 600;
+    color: #2c3e50;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* === NÚT HÀNH ĐỘNG === */
+
+.editBtn {
+    background: #2980b9;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-right: 6px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 70px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(41, 128, 185, 0.3);
+}
+
+.editBtn:hover {
+    background: #1f6391;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(41, 128, 185, 0.4);
+}
+
+.deleteBtn {
+    background: #e74c3c;
+    color: white;
+    border: 1px solid #c0392b;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 70px;
+}
+
+.deleteBtn:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(231, 76, 60, 0.3);
+}
+
+
+/* Trạng thái loading/error */
+
+.loading,
+.error {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 18px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin: 30px;
+}
+
+.loading {
+    color: #3498db;
+}
+
+.error {
+    color: #e74c3c;
+}
+
+
+/* Trống */
+
+.empty {
+    text-align: center;
+    padding: 50px 20px;
+    color: #95a5a6;
+    font-style: italic;
+    font-size: 15px;
+}
+
+
+/* === RESPONSIVE === */
+
+@media (max-width: 992px) {
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+    .addBtn {
+        align-self: flex-end;
+    }
+    .table th,
+    .table td {
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+    .name {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 600px) {
+    .submitBtn,
+    .cancelBtn {
+        width: 100%;
+    }
+}
