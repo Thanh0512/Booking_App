@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./featured.css";
-import axios from "./axios";
+import axios from "../../axios";
 const Featured = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
