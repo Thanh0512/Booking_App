@@ -14,35 +14,52 @@ const Featured = () => {
     ];
     
     useEffect(() => {
-        const fetchData = async () => {
-            try {
+       const fetchData = async () => {
+            try {
+                setLoading(true);
+                setError(null);
+                
+               
+                const res = await axios.get("/hotels/countByCity"); 
+                
+               
+                const apiData = res.data; 
+                
+                const combinedData = cityData.map(cityItem => {
+                    const found = apiData.find(item => item.city === cityItem.city);
+                    
+                    return {
+                        ...cityItem,
+                        count: found && typeof found.count === 'number' ? found.count : 0 
+                    };
+                });
+                
+                setData(combinedData);
+                setLoading(false);
+
+            } catch (err) {
                 
-                const res = await axios.get("/hotels/countByCity"); 
+                let errorMessage = 'Lỗi không xác định khi tải API.';
                 
-                if (!res.ok) {
-                    
-                    const errorDetails = await res.text().catch(() => 'No error body');
-                    throw new Error(`API failed with status ${res.status}. Details: ${errorDetails.substring(0, 50)}`);
+                if (err.response) {
+                   
+                    const status = err.response.status;
+                    const serverMessage = err.response.data 
+                                        ? JSON.stringify(err.response.data) 
+                                        : 'Không có chi tiết lỗi.';
+                    errorMessage = `API thất bại (Status ${status}). Chi tiết: ${serverMessage}`;
+                } else if (err.request) {
+                    // Lỗi mạng/CORS/Timeout (không nhận được phản hồi)
+                    errorMessage = `Lỗi mạng: Không nhận được phản hồi từ máy chủ.`;
+                } else {
+                    // Lỗi khác
+                    errorMessage = `Lỗi thiết lập Request: ${err.message}`;
                 }
-                const apiData = await res.json();
-                
-                const combinedData = cityData.map(cityItem => {
-                    
-                    const found = apiData.find(item => item.city === cityItem.city);
-                    
-                    return {
-                        ...cityItem,
-                        count: found ? found.count : 0 
-                    };
-                });
-                
-                setData(combinedData);
-                setLoading(false);
-            } catch (err) {
-                setError(err.message);
-                setLoading(false);
-            }
-        };
+
+                setError(errorMessage);
+                setLoading(false);
+            }
+        };
         fetchData();
     }, []);
 
