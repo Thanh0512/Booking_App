@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./featuredProperties.css";
-import axios from "./axios";
+import axios from "../../axios";
 
 const FeaturedProperties = () => {
     const [data, setData] = useState([]);
