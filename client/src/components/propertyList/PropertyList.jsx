@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./propertyList.css";
-import axios from "axios"; 
+import axios from "./axios"; 
 
 const PropertyList = () => {
     const [data, setData] = useState([]);
@@ -21,7 +21,7 @@ const PropertyList = () => {
         const fetchData = async () => {
             try {
                 
-                const res = await axios.get("http://localhost:5000/api/hotels/countByType"); 
+                const res = await axios.get("/hotels/countByType"); 
                 
                 
                 const combinedData = propertyTypes.map(propItem => {

@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axios";
 
 const Hotel = () => {
   const { hotelID } = useParams();
@@ -48,7 +48,7 @@ const Hotel = () => {
   useEffect(() => {
     const fetchHotel = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/hotels/${hotelID}`);
+        const res = await axios.get(`/hotels/${hotelID}`);
         setHotel(res.data);
       } catch (err) {
         console.error(err);
@@ -67,7 +67,7 @@ const Hotel = () => {
       if (!token) return;
 
       try {
-        const res = await axios.get("http://localhost:5000/api/users/me", {
+        const res = await axios.get("/users/me", {
           headers: {Authorization: `Bearer ${token}`},
         });
         const user = res.data;
@@ -98,9 +98,7 @@ const Hotel = () => {
       }
 
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/hotels/room/checkAvailable`,
-          {
+        const res = await axios.get(`/hotels/room/checkAvailable`, {
             params: {
               hotelId: hotelID,
               startDate: bookingData.checkIn,
@@ -206,7 +204,7 @@ const token = localStorage.getItem("token");
     }
 
     try {
-      await axios.post("http://localhost:5000/api/transactions", {
+      await axios.post("/transactions", {
        
         hotel: hotelID, 
         

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./featuredProperties.css";
-import axios from "axios"; 
+import axios from "./axios";
 
 const FeaturedProperties = () => {
     const [data, setData] = useState([]);
@@ -11,7 +11,7 @@ const FeaturedProperties = () => {
         const fetchData = async () => {
             try {
                 
-                const res = await axios.get("http://localhost:5000/api/hotels/topRated"); 
+                const res = await axios.get("/hotels/topRated"); 
                 
                 setData(res.data); 
                 setLoading(false);

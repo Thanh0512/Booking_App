@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
-import axios from "axios";
+import axios from "../../axios";
 
 const List = () => {
   const location = useLocation();
@@ -39,7 +39,7 @@ const List = () => {
 
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/hotels/search", {
+      const res = await axios.get("/hotels/search", {
   params: {
     city: destination,
     startDate: format(date[0].startDate, "yyyy-MM-dd"),

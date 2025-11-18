@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./featured.css";
-
+import axios from "./axios";
 const Featured = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const Featured = () => {
         const fetchData = async () => {
             try {
                 
-                const res = await fetch("http://localhost:5000/api/hotels/countByCity"); 
+                const res = await axios.get("/hotels/countByCity"); 
                 
                 if (!res.ok) {
                     
