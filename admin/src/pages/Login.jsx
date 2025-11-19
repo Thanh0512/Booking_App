@@ -23,7 +23,7 @@ const handleSubmit = async (e) => {
     const token = res.data.token;
     if (!token) throw new Error('Không nhận được token');
 
-    localStorage.setItem('adminToken', token);
+    localStorage.setItem('token', token);
     console.log('TOKEN SAVED:', token); // DEBUG
 
     navigate('/dashboard');
