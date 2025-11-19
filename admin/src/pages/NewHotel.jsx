@@ -21,7 +21,7 @@ const NewHotel = () => {
   const { id } = useParams(); 
 
   useEffect(() => {
-    const token = localStorage.getItem("adminToken");
+    const token = localStorage.getItem("token");
     if (!token) return navigate('/login');
     if (!id) return;
     const fetchHotel = async () => {
