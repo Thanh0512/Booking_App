@@ -14,7 +14,7 @@ const Transactions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
     const fetchTransactions = async () => {
@@ -26,7 +26,7 @@ const Transactions = () => {
         setTotalPages(res.data.totalPages);
       } catch (err) {
         if (err.response?.status === 401) {
-          localStorage.removeItem('adminToken');
+          localStorage.removeItem('token');
           navigate('/login');
         }
         console.error('Lỗi tải giao dịch:', err);
@@ -38,7 +38,7 @@ const Transactions = () => {
   }, [page, navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
