@@ -15,7 +15,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
     const fetchData = async () => {
@@ -29,7 +29,7 @@ const Dashboard = () => {
         setTransactions(Array.isArray(transRes.data) ? transRes.data : []);
       } catch (err) {
         if (err.response?.status === 401) {
-          localStorage.removeItem('adminToken');
+          localStorage.removeItem('token');
           navigate('/login');
         }
       } finally {
@@ -40,7 +40,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
