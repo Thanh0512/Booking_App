@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     const fetchData = async () => {
       try {
-        const headers = { Authorization: `Bearer ${token}` };
+        
         const [infoRes, transRes] = await Promise.all([
           axios.get('/admin/infoboard'),
           axios.get('/admin/transactions/latest')
