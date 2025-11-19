@@ -23,7 +23,7 @@ const NewRoom = () => {
 
   // Load danh sách khách sạn
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
     const fetchHotels = async () => {
       try {
