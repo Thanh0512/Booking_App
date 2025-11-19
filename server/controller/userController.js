@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 
 // === ĐĂNG KÝ ===
 const registerUser = async(req, res) => {
-    const { email, password } = req.body;
+    const email = req.body.email.toLowerCase();
+    const { password } = req.body;
 
     try {
         // Kiểm tra email đã tồn tại chưa
@@ -40,7 +41,8 @@ const registerUser = async(req, res) => {
 // === ĐĂNG NHẬP ===
 const loginUser = async(req, res) => {
      console.log("Received login request body:", req.body); 
-    const { email, password } = req.body;
+     const email = req.body.email.toLowerCase();
+    const { password } = req.body;
 
     try {
         const user = await User.findOne({ email }).select("+password");
