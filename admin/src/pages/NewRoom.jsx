@@ -77,7 +77,14 @@ const NewRoom = () => {
       .filter(r => !isNaN(r.number));
 
     if (roomNums.length === 0) return alert('Số phòng không hợp lệ');
-
+    const payload = {
+        title, 
+        price: parseInt(price), 
+        maxPeople: parseInt(maxPeople), 
+        desc, 
+        hotel, 
+        roomNumbers: roomNums
+    };
     try {
       const token = localStorage.getItem('adminToken');
       if (isEdit) {
