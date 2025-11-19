@@ -12,7 +12,7 @@ const Hotels = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
     const fetchHotels = async () => {
@@ -21,7 +21,7 @@ const Hotels = () => {
         setHotels(res.data);
       } catch (err) {
         if (err.response?.status === 401) {
-          localStorage.removeItem('adminToken');
+          localStorage.removeItem('token');
           navigate('/login');
         }
       } finally {
