@@ -42,7 +42,7 @@ const NewHotel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const token = localStorage.getItem("adminToken");
+    const token = localStorage.getItem("token");
     if (!token) {
         setLoading(false);
         return navigate("/login");
