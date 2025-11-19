@@ -9,7 +9,8 @@ const app = express();
 const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3001',
-    'https://booking-app-nipq.onrender.com'
+    'https://booking-app-nipq.onrender.com',
+    'https://booking-admin-dbmd.onrender.com/'
 ];
 app.use(cors({
     origin: (origin, callback) => {
