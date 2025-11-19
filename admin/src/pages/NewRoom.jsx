@@ -101,7 +101,7 @@ const NewRoom = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
