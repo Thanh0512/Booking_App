@@ -36,7 +36,7 @@ const Hotels = () => {
     if (!confirmDelete) return;
 
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = localStorage.getItem('token');
      const transactionRes = await axios.get(`/transactions/hotel/${hotelId}`);
 
       if (transactionRes.data.length > 0) {
@@ -54,7 +54,7 @@ const Hotels = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
