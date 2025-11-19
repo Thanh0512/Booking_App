@@ -10,7 +10,7 @@ const Users = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
     const fetchUsers = async () => {
       try {
