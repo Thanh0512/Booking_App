@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import Sidebar from '../components/Sidebar';
 import styles from './NewRoom.module.css';
 
-const API_ROOMS = 'http://localhost:5000/api/admin/rooms';
-const API_HOTELS = 'http://localhost:5000/api/hotels';
+
 
 const NewRoom = () => {
   const { id } = useParams(); // nếu có id => edit
@@ -24,12 +23,11 @@ const NewRoom = () => {
 
   // Load danh sách khách sạn
   useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) return navigate('/login');
     const fetchHotels = async () => {
       try {
-        const token = localStorage.getItem('adminToken');
-        const res = await axios.get(API_HOTELS, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await axios.get('/hotels');
         setHotels(res.data);
       } catch (err) {
         console.log(err);
@@ -43,10 +41,7 @@ const NewRoom = () => {
     if (!isEdit) { setLoading(false); return; }
     const fetchRoom = async () => {
       try {
-        const token = localStorage.getItem('adminToken');
-        const res = await axios.get(`${API_ROOMS}/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await axios.get(`/admin/rooms/${id}`);
         const room = res.data;
         setFormData({
           title: room.title,
@@ -86,14 +81,10 @@ const NewRoom = () => {
     try {
       const token = localStorage.getItem('adminToken');
       if (isEdit) {
-        await axios.put(`${API_ROOMS}/${id}`, {
-          title, price: parseInt(price), maxPeople: parseInt(maxPeople), desc, hotel, roomNumbers: roomNums
-        }, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.put(`/admin/rooms/${id}`, payload);
         alert('Cập nhật phòng thành công');
       } else {
-        await axios.post(API_ROOMS, {
-          title, price: parseInt(price), maxPeople: parseInt(maxPeople), desc, hotel, roomNumbers: roomNums
-        }, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.post('/admin/rooms', payload);
         alert('Tạo phòng thành công');
       }
       navigate('/rooms');

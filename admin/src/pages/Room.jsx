@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import Sidebar from '../components/Sidebar';
 import styles from './Room.module.css';
 
-const API_ROOMS = 'http://localhost:5000/api/admin/rooms/details';
+
 
 const Room = () => {
   const [rooms, setRooms] = useState([]);
@@ -17,7 +17,7 @@ const Room = () => {
 
     const fetchRooms = async () => {
       try {
-        const res = await axios.get(API_ROOMS, { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get('/admin/rooms/details');
         setRooms(res.data);
       } catch (err) {
         console.error(err);
@@ -30,7 +30,7 @@ const Room = () => {
     if (!window.confirm('Bạn có chắc muốn xóa phòng này?')) return;
     try {
       const token = localStorage.getItem('adminToken');
-      await axios.delete(`http://localhost:5000/api/admin/rooms/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/admin/rooms/${id}`);
       setRooms(prev => prev.filter(r => r._id !== id));
       alert('Xóa phòng thành công');
     } catch (err) {

@@ -1,21 +1,20 @@
 // src/pages/Users.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 import styles from './Users.module.css';
 import Sidebar from '../components/Sidebar';
-
+import { useNavigate } from 'react-router-dom';
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-
+  const navigate = useNavigate();
   useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) return navigate('/login');
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem('adminToken');
-        const res = await axios.get("http://localhost:5000/api/admin/users", {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await axios.get("/admin/users");
         setUsers(res.data);
       } catch (err) {
         setError('Không thể tải danh sách người dùng');

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import Sidebar from '../components/Sidebar';
 import styles from './Transactions.module.css';
 
-const API_TRANSACTIONS = 'http://localhost:5000/api/admin/transactions';
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -20,8 +19,7 @@ const Transactions = () => {
 
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get(API_TRANSACTIONS, {
-          headers: { Authorization: `Bearer ${token}` },
+        const res = await axios.get('/admin/transactions', {
           params: { page, limit }
         });
         setTransactions(res.data.transactions);

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import Sidebar from '../components/Sidebar';
 import styles from './Hotels.module.css';
 
-const API_HOTELS = 'http://localhost:5000/api/hotels';
-const API_ADMIN = 'http://localhost:5000/api/admin/hotels';
-const API_TRANSACTIONS = 'http://localhost:5000/api/transactions';
+
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -19,9 +17,7 @@ const Hotels = () => {
 
     const fetchHotels = async () => {
       try {
-        const res = await axios.get(API_HOTELS, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get('/hotels');
         setHotels(res.data);
       } catch (err) {
         if (err.response?.status === 401) {
@@ -41,18 +37,14 @@ const Hotels = () => {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const transactionRes = await axios.get(`${API_TRANSACTIONS}/hotel/${hotelId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+     const transactionRes = await axios.get(`/transactions/hotel/${hotelId}`);
 
       if (transactionRes.data.length > 0) {
         alert('Không thể xóa! Khách sạn này đã có giao dịch.');
         return;
       }
 
-      await axios.delete(`${API_ADMIN}/${hotelId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(`/admin/hotels/${hotelId}`);
 
       setHotels((prev) => prev.filter((h) => h._id !== hotelId));
       alert('Xóa thành công!');

@@ -1,13 +1,12 @@
 // admin/src/pages/Dashboard.jsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import InfoBoard from '../components/InfoBoard';
 import TransactionTable from '../components/TransactionTable';
 import styles from './Dashboard.module.css';
 
-const API_BASE = 'http://localhost:5000/api/admin';
 
 const Dashboard = () => {
   const [info, setInfo] = useState({});
@@ -23,8 +22,8 @@ const Dashboard = () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [infoRes, transRes] = await Promise.all([
-          axios.get(`${API_BASE}/infoboard`, { headers }),
-          axios.get(`${API_BASE}/transactions/latest`, { headers })
+          axios.get('/admin/infoboard'),
+          axios.get('/admin/transactions/latest')
         ]);
         setInfo(infoRes.data || {});
         setTransactions(Array.isArray(transRes.data) ? transRes.data : []);

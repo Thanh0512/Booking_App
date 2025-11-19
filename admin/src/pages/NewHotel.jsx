@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "../axios";
 import Sidebar from "../components/Sidebar";
 import styles from "./NewHotel.module.css";
 
-const API_ADMIN = "http://localhost:5000/api/admin/hotels";
 
 const NewHotel = () => {
   const [formData, setFormData] = useState({
@@ -19,16 +18,15 @@ const NewHotel = () => {
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams(); // 👈 lấy id từ URL
+  const { id } = useParams(); 
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) return navigate('/login');
     if (!id) return;
     const fetchHotel = async () => {
       try {
-        const token = localStorage.getItem("adminToken");
-        const res = await axios.get(`${API_ADMIN}/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(`/admin/hotels/${id}`);
         setFormData(res.data);
       } catch (err) {
         alert("Không thể tải dữ liệu khách sạn!");
@@ -45,17 +43,16 @@ const NewHotel = () => {
     e.preventDefault();
     setLoading(true);
     const token = localStorage.getItem("adminToken");
-
+    if (!token) {
+        setLoading(false);
+        return navigate("/login");
+    }
     try {
       if (id) {
-        await axios.put(`${API_ADMIN}/${id}`, formData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.put(`/admin/hotels/${id}`, formData);
         alert("Cập nhật thành công!");
       } else {
-        await axios.post(API_ADMIN, formData, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await axios.post('/admin/hotels', formData);
         alert("Thêm khách sạn thành công!");
       }
       navigate("/hotels");

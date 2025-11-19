@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 
-const API_BASE = 'http://localhost:5000/api/admin';
+
 
 const Login = () => {
   const [form, setForm] = useState({ email: 'admin@mail.com', password: '1' });
@@ -17,7 +17,7 @@ const handleSubmit = async (e) => {
   setError('');
   setLoading(true);
   try {
-    const res = await axios.post(`${API_BASE}/login`, form);
+    const res = await axios.post('/admin/login', form);
     
    
     const token = res.data.token;
