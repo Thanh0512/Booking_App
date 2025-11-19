@@ -39,10 +39,12 @@ const registerUser = async(req, res) => {
 
 // === ĐĂNG NHẬP ===
 const loginUser = async(req, res) => {
+     console.log("Received login request body:", req.body); 
     const { email, password } = req.body;
 
     try {
         const user = await User.findOne({ email }).select("+password");
+        console.log("Found user:", user);
         if (!user) {
             return res.status(401).json({
                 success: false,
@@ -51,6 +53,7 @@ const loginUser = async(req, res) => {
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
+        console.log("Password match:", isMatch);
         if (!isMatch) {
             return res.status(401).json({
                 success: false,
