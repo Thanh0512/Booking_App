@@ -12,7 +12,7 @@ const Room = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token');
     if (!token) return navigate('/login');
 
     const fetchRooms = async () => {
@@ -29,7 +29,7 @@ const Room = () => {
   const handleDelete = async id => {
     if (!window.confirm('Bạn có chắc muốn xóa phòng này?')) return;
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = localStorage.getItem('token');
       await axios.delete(`/admin/rooms/${id}`);
       setRooms(prev => prev.filter(r => r._id !== id));
       alert('Xóa phòng thành công');
@@ -42,7 +42,7 @@ const Room = () => {
 
   return (
     <div className={styles.container}>
-      <Sidebar onLogout={() => { localStorage.removeItem('adminToken'); navigate('/login'); }} />
+      <Sidebar onLogout={() => { localStorage.removeItem('token'); navigate('/login'); }} />
       <div className={styles.content}>
         <h1>Rooms List</h1>
         <button onClick={() => navigate('/new-room')}>Add New Room</button>
