@@ -86,7 +86,7 @@ const NewRoom = () => {
         roomNumbers: roomNums
     };
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = localStorage.getItem('token');
       if (isEdit) {
         await axios.put(`/admin/rooms/${id}`, payload);
         alert('Cập nhật phòng thành công');
