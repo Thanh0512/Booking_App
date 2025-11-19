@@ -13,7 +13,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    onsole.log("Sending login data:", formData);
+    console.log("Sending login data:", formData);
     try {
       const res = await loginUser(formData);
       console.log("Login response:", res.data); 
